@@ -51,7 +51,7 @@
   }
 
   body {
-    @apply bg-bg-primary text-text-primary font-sans antialiased transition-colors duration-300 overflow-hidden h-screen;
+    @apply bg-bg-primary text-text-primary font-sans antialiased transition-colors duration-300 min-h-screen;
     background:
       radial-gradient(circle at 12% 18%, rgba(20, 184, 166, 0.28), transparent 30%),
       radial-gradient(circle at 82% 12%, rgba(99, 102, 241, 0.34), transparent 32%),
@@ -61,7 +61,7 @@
   }
 
   html {
-    @apply overflow-hidden h-screen;
+    @apply min-h-screen;
   }
   
   h1, h2, h3, h4, h5, h6 {

@@ -175,33 +175,33 @@ export default function AdminLeads() {
       {/* Table Container */}
       <div className="card-modern rounded-[2.5rem] overflow-hidden relative z-10 border border-white/5">
         <div className="overflow-x-auto">
-          <table className="w-full text-left">
+          <table className="min-w-full text-left">
             <thead className="bg-bg-secondary/40 text-[10px] font-black text-text-muted uppercase tracking-[0.2em] border-b border-white/5 italic">
               <tr>
-                <th className="px-10 py-6">Identity / Entity</th>
-                <th className="px-10 py-6">Communication Vector</th>
-                <th className="px-10 py-6">Interaction state</th>
-                <th className="px-10 py-6">Priority</th>
-                <th className="px-10 py-6">Timestamp</th>
-                <th className="px-10 py-6 text-right">Actions</th>
+                <th className="px-4 py-4 sm:px-6 sm:py-5">Identity / Entity</th>
+                <th className="px-4 py-4 sm:px-6 sm:py-5">Communication Vector</th>
+                <th className="px-4 py-4 sm:px-6 sm:py-5">Interaction state</th>
+                <th className="px-4 py-4 sm:px-6 sm:py-5">Priority</th>
+                <th className="px-4 py-4 sm:px-6 sm:py-5">Timestamp</th>
+                <th className="px-4 py-4 sm:px-6 sm:py-5 text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">
               {loading ? (
-                <tr><td colSpan={6} className="px-10 py-32 text-center text-text-muted italic font-black uppercase tracking-widest opacity-40">Decrypting registry data...</td></tr>
+                <tr><td colSpan={6} className="px-4 py-20 sm:px-6 sm:py-32 text-center text-text-muted italic font-black uppercase tracking-widest opacity-40">Decrypting registry data...</td></tr>
               ) : filteredLeads.length === 0 ? (
-                <tr><td colSpan={6} className="px-10 py-32 text-center text-text-muted italic font-black uppercase tracking-widest opacity-40">Zero vectors found in current scope.</td></tr>
+                <tr><td colSpan={6} className="px-4 py-20 sm:px-6 sm:py-32 text-center text-text-muted italic font-black uppercase tracking-widest opacity-40">Zero vectors found in current scope.</td></tr>
               ) : filteredLeads.map((lead) => (
                 <tr key={lead._id} className="hover:bg-accent/5 transition-all group">
-                  <td className="px-10 py-8">
+                  <td className="px-4 py-5 sm:px-6 sm:py-8">
                     <div className="font-black text-text-primary group-hover:text-accent transition-colors italic text-base uppercase tracking-tight">{lead.name}</div>
                     <div className="text-[10px] font-bold text-text-muted uppercase tracking-widest opacity-60">{lead.company || 'Private Node'}</div>
                   </td>
-                  <td className="px-10 py-8">
+                  <td className="px-4 py-5 sm:px-6 sm:py-8">
                     <div className="text-sm font-bold text-text-primary mb-1">{lead.email}</div>
                     <div className="text-[10px] font-black text-text-muted uppercase tracking-tighter opacity-50">{lead.phone || 'NO PHONE'}</div>
                   </td>
-                  <td className="px-10 py-8">
+                  <td className="px-4 py-5 sm:px-6 sm:py-8">
                     <select 
                       defaultValue={lead.status}
                       onChange={(e) => updateStatus(lead._id, e.target.value)}
@@ -217,20 +217,20 @@ export default function AdminLeads() {
                       <option value="lost">Lost</option>
                     </select>
                   </td>
-                  <td className="px-10 py-8">
+                  <td className="px-4 py-5 sm:px-6 sm:py-8">
                     <div className={`text-[9px] font-black px-3 py-1 rounded-full inline-block border italic tracking-[0.2em] shadow-sm ${
                       lead.priority === 'high' ? 'bg-accent/10 border-accent/40 text-accent shadow-[0_0_10px_rgba(99,102,241,0.2)]' : 'bg-white/5 border-white/10 text-text-muted'
                     }`}>
                       {lead.priority?.toUpperCase() || 'NORMAL'}
                     </div>
                   </td>
-                  <td className="px-10 py-8">
+                  <td className="px-4 py-5 sm:px-6 sm:py-8">
                     <div className="flex items-center gap-2 text-text-muted opacity-60">
                       <Clock size={12} />
                       <span className="text-[10px] font-black uppercase tracking-tighter">{lead.createdAt ? formatDate(new Date(lead.createdAt)) : 'Recent'}</span>
                     </div>
                   </td>
-                  <td className="px-10 py-8 text-right">
+                  <td className="px-4 py-5 sm:px-6 sm:py-8 text-right">
                     <div className="flex justify-end gap-3 lg:opacity-0 lg:group-hover:opacity-100 transition-all">
                       <button 
                         onClick={() => setReplyingTo(lead)}

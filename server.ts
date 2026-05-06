@@ -33,9 +33,10 @@ dotenv.config();
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const aiClient = GEMINI_API_KEY ? new GoogleGenAI({ apiKey: GEMINI_API_KEY }) : null;
 
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET as string;
 if (!JWT_SECRET) {
   console.error("CRITICAL ERROR: JWT_SECRET environment variable is not defined.");
+  throw new Error("JWT_SECRET environment variable is required for server startup.");
 }
 const MONGODB_URI = process.env.MONGODB_URI;
 const COMPANY_TRENDS_PATH = path.join(process.cwd(), "data", "company-trends.json");

@@ -346,34 +346,34 @@ export default function AdminDashboard() {
            </Link>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full text-left">
+          <table className="min-w-full text-left">
             <thead className="bg-bg-secondary/40 text-[10px] font-black text-text-muted uppercase tracking-[0.2em] italic">
                 <tr>
-                  <th className="px-10 py-6">Identity</th>
-                  <th className="px-10 py-6">Interaction</th>
-                  <th className="px-10 py-6">Integrity Status</th>
-                  <th className="px-10 py-6">Timestamp</th>
-                  <th className="px-10 py-6"></th>
+                  <th className="px-4 py-4 sm:px-6 sm:py-5">Identity</th>
+                  <th className="px-4 py-4 sm:px-6 sm:py-5">Interaction</th>
+                  <th className="px-4 py-4 sm:px-6 sm:py-5">Integrity Status</th>
+                  <th className="px-4 py-4 sm:px-6 sm:py-5">Timestamp</th>
+                  <th className="px-4 py-4 sm:px-6 sm:py-5"></th>
                 </tr>
             </thead>
             <tbody className="divide-y divide-white/5 bg-bg-card/20 backdrop-blur-sm">
                   {recentLeads.length === 0 ? (
                     <tr>
-                      <td colSpan={5} className="px-10 py-16 text-center text-text-muted italic font-bold uppercase tracking-widest opacity-40">Zero interactions detected.</td>
+                      <td colSpan={5} className="px-4 py-12 sm:px-6 sm:py-16 text-center text-text-muted italic font-bold uppercase tracking-widest opacity-40">Zero interactions detected.</td>
                     </tr>
                   ) : recentLeads.map((row, i) => (
                     <tr key={row._id} className="hover:bg-accent/5 transition-all group cursor-pointer" onClick={() => navigate('/admin/leads')}>
-                        <td className="px-10 py-8">
+                        <td className="px-4 py-5 sm:px-6 sm:py-8">
                           <div className="font-black text-text-primary uppercase tracking-tight italic text-base">{row.name}</div>
                           <div className="text-xs text-text-muted font-bold opacity-60 tracking-wider">{row.email}</div>
                         </td>
-                        <td className="px-10 py-8">
+                        <td className="px-4 py-5 sm:px-6 sm:py-8">
                           <div className="flex flex-col gap-1">
                             <span className="text-[10px] font-black uppercase tracking-widest text-text-muted opacity-50">Event</span>
                             <span className="text-sm font-bold text-text-secondary italic">Inquiry submitted from {row.source}</span>
                           </div>
                         </td>
-                        <td className="px-10 py-8">
+                        <td className="px-4 py-5 sm:px-6 sm:py-8">
                           <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.15em] italic shadow-sm flex items-center w-fit gap-2 ${
                             row.status === 'qualified' ? 'bg-success/20 text-success border border-success/30' : 
                             row.status === 'contacted' ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' :
@@ -387,13 +387,13 @@ export default function AdminDashboard() {
                               {row.status}
                           </span>
                         </td>
-                        <td className="px-10 py-8">
+                        <td className="px-4 py-5 sm:px-6 sm:py-8">
                           <div className="flex items-center gap-2 text-text-muted opacity-60">
                             <Clock size={12} />
                             <span className="text-[10px] font-black uppercase tracking-tighter">{formatDate(new Date(row.createdAt))}</span>
                           </div>
                         </td>
-                        <td className="px-10 py-8 text-right">
+                        <td className="px-4 py-5 sm:px-6 sm:py-8 text-right">
                           <div className="p-3 bg-white/5 rounded-2xl opacity-0 group-hover:opacity-100 group-hover:bg-accent transition-all text-accent group-hover:text-white group-hover:rotate-12">
                             <ArrowUpRight size={20} />
                           </div>
