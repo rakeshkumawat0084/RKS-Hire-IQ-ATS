@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { GoogleGenAI } from "@google/genai";
 import dns from "node:dns";
 
 dns.setDefaultResultOrder("ipv4first");
@@ -28,6 +29,9 @@ import { EmailTemplate } from "./src/models/EmailTemplate";
 import { Settings as SettingsModel } from "./src/models/Settings";
 
 dotenv.config();
+
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const aiClient = GEMINI_API_KEY ? new GoogleGenAI({ apiKey: GEMINI_API_KEY }) : null;
 
 const JWT_SECRET = process.env.JWT_SECRET;
 if (!JWT_SECRET) {
@@ -421,6 +425,54 @@ async function startServer() {
       token 
     });
   };
+
+  async function aiGenerate(params: { model: string; contents: string; config?: any; fallbackModels?: string[] }) {
+    if (!aiClient) {
+      throw new Error('Gemini API Key is not configured on the backend.');
+    }
+
+    const { model, fallbackModels = [], ...body } = params;
+    const orderedModels = [model, ...fallbackModels].filter(Boolean);
+    let lastError: any;
+
+    for (const candidate of orderedModels) {
+      try {
+        return await aiClient.models.generateContent({ ...body, model: candidate });
+      } catch (err: any) {
+        const msg = err?.message || String(err);
+        if (
+          msg.includes('429') ||
+          msg.includes('quota') ||
+          msg.includes('RESOURCE_EXHAUSTED') ||
+          msg.includes('404') ||
+          msg.includes('not found') ||
+          msg.includes('not supported')
+        ) {
+          lastError = err;
+          console.warn(`[AI] Model ${candidate} unavailable, trying next fallback...`);
+          continue;
+        }
+        throw err;
+      }
+    }
+
+    throw lastError || new Error('AI generation failed');
+  }
+
+  app.post('/api/ai/generate', checkDb, async (req, res) => {
+    try {
+      const { model, contents, config, fallbackModels } = req.body;
+      if (!model || !contents) {
+        return res.status(400).json({ error: 'AI request requires model and contents.' });
+      }
+
+      const response = await aiGenerate({ model, contents, config, fallbackModels });
+      res.json({ response });
+    } catch (err: any) {
+      console.error('[AI] proxy error:', err?.message || err);
+      res.status(500).json({ error: err?.message || 'AI generation failed' });
+    }
+  });
 
   // --- AUTH ROUTES ---
   app.post("/api/auth/register", checkDb, async (req, res) => {

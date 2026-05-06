@@ -1,6 +1,12 @@
-import { GoogleGenAI, Type } from "@google/genai";
+import api from '../lib/api';
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY as string });
+const Type = {
+  OBJECT: 'object',
+  ARRAY: 'array',
+  STRING: 'string',
+  NUMBER: 'number',
+  BOOLEAN: 'boolean',
+} as const;
 
 // ─── Model cascade: tries fastest first, falls back on 429 quota errors ───────
 export const AI_MODELS = [
@@ -24,31 +30,22 @@ export const setPreferredAIModel = (model: string) => {
   if (MODELS.includes(model)) localStorage.setItem(MODEL_STORAGE_KEY, model);
 };
 
-async function generateWithFallback(params: Parameters<typeof ai.models.generateContent>[0]): Promise<ReturnType<typeof ai.models.generateContent>> {
-  let lastError: any;
+async function generateWithFallback(params: {
+  model: string;
+  contents: string | any[];
+  config?: any;
+  fallbackModels?: string[];
+}): Promise<any> {
   const preferredModel = getPreferredAIModel();
   const orderedModels = [preferredModel, ...MODELS.filter(model => model !== preferredModel)];
-  for (const model of orderedModels) {
-    try {
-      return await ai.models.generateContent({ ...params, model });
-    } catch (err: any) {
-      const msg = err?.message || String(err);
-      if (
-        msg.includes('429') ||
-        msg.includes('quota') ||
-        msg.includes('RESOURCE_EXHAUSTED') ||
-        msg.includes('404') ||
-        msg.includes('not found') ||
-        msg.includes('not supported')
-      ) {
-        lastError = err;
-        console.warn(`[AI] Model ${model} unavailable, trying next fallback...`);
-        continue; // try next model
-      }
-      throw err; // non-quota error → rethrow immediately
-    }
-  }
-  throw new Error('⚠️ API quota exceeded on all models. Please wait a few minutes and try again, or upgrade your Gemini API plan at https://ai.google.dev');
+  const fallbackModels = orderedModels.filter(model => model !== params.model);
+
+  const response = await api.post('/ai/generate', {
+    ...params,
+    fallbackModels,
+  });
+
+  return response.data.response;
 }
 
 // Friendly error parser — converts raw Gemini JSON errors into readable messages
@@ -84,10 +81,6 @@ export interface ResumeAnalysisResult {
 }
 
 export const analyzeResume = async (resumeText: string): Promise<ResumeAnalysisResult> => {
-  if (!process.env.GEMINI_API_KEY || process.env.GEMINI_API_KEY === 'undefined') {
-    throw new Error("Gemini API Key is not configured. Please add it to the environment variables.");
-  }
-
   const model = "gemini-2.5-flash";
   
   const prompt = `
@@ -188,10 +181,6 @@ export const analyzeResumeAdvanced = async (
   imageBase64?: string,
   mimeType?: string
 ): Promise<AdvancedResumeAnalysis> => {
-  if (!process.env.GEMINI_API_KEY || process.env.GEMINI_API_KEY === 'undefined') {
-    throw new Error("Gemini API Key is not configured.");
-  }
-
   const model = "gemini-2.5-flash";
 
   const systemPrompt = `You are an elite 2025 Career Intelligence AI — a combination of senior ATS engineer, Fortune 500 recruiter, and live market analyst.
