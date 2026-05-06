@@ -1,0 +1,30 @@
+export const LAYOUTS = [
+  { id: "modern", name: "Modern", description: "Clean, single-column layout for any industry." },
+  { id: "executive", name: "Executive", description: "Professional two-column sidebar layout." },
+  { id: "tech", name: "Tech", description: "Monospace accents and grid structure for engineers." },
+  { id: "creative", name: "Creative", description: "Bold colors and distinctive layout for designers." },
+  { id: "minimal", name: "Minimal", description: "Ultra-clean layout with focus on typography." },
+  { id: "brutalist", name: "Brutalist", description: "High contrast, bold borders, and raw aesthetics." },
+  { id: "academic", name: "Academic", description: "Dense, formal layout for research and academia." },
+  { id: "sidebar-left", name: "Sidebar Left", description: "Classic layout with info on the left side." },
+  { id: "compact", name: "Compact", description: "Optimized for one-page density." },
+  { id: "elegant", name: "Elegant", description: "Serif-heavy, high-class professional look." },
+  { id: "gradient", name: "Gradient", description: "Vibrant header with smooth transitions." },
+  { id: "functional", name: "Functional", description: "Skill-first layout for career changers." },
+  { id: "timeline", name: "Timeline", description: "Visual history with vertical markers." },
+];
+
+export const THEMES = [
+  { id: "slate", name: "Slate", primary: "#0f172a", bg: "bg-slate-900", text: "text-slate-900", border: "border-slate-900" },
+  { id: "indigo", name: "Indigo", primary: "#4f46e5", bg: "bg-indigo-600", text: "text-indigo-600", border: "border-indigo-600" },
+  { id: "emerald", name: "Emerald", primary: "#059669", bg: "bg-emerald-600", text: "text-emerald-600", border: "border-emerald-600" },
+  { id: "rose", name: "Rose", primary: "#e11d48", bg: "bg-rose-600", text: "text-rose-600", border: "border-rose-600" },
+  { id: "amber", name: "Amber", primary: "#d97706", bg: "bg-amber-600", text: "text-amber-600", border: "border-amber-600" },
+  { id: "violet", name: "Violet", primary: "#7c3aed", bg: "bg-violet-600", text: "text-violet-600", border: "border-violet-600" },
+  { id: "zinc", name: "Zinc", primary: "#18181b", bg: "bg-zinc-900", text: "text-zinc-900", border: "border-zinc-900" },
+  { id: "orange", name: "Orange", primary: "#ea580c", bg: "bg-orange-600", text: "text-orange-600", border: "border-orange-600" },
+  { id: "cyan", name: "Cyan", primary: "#0891b2", bg: "bg-cyan-600", text: "text-cyan-600", border: "border-cyan-600" },
+  { id: "lime", name: "Lime", primary: "#65a30d", bg: "bg-lime-600", text: "text-lime-600", border: "border-lime-600" },
+  { id: "fuchsia", name: "Fuchsia", primary: "#c026d3", bg: "bg-fuchsia-600", text: "text-fuchsia-600", border: "border-fuchsia-600" },
+  { id: "teal", name: "Teal", primary: "#0d9488", bg: "bg-teal-600", text: "text-teal-600", border: "border-teal-600" },
+];

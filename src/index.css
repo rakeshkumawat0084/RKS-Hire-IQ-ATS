@@ -1,0 +1,935 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-serif: "Playfair Display", serif;
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-card: var(--bg-card);
+  --color-bg-hover: var(--bg-hover);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-success: var(--success);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --color-border-accent: var(--border-accent);
+}
+
+@layer base {
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f1f5f9;
+    --bg-card: #ffffff;
+    --bg-hover: #e2e8f0;
+    --accent: #6366f1;
+    --accent-soft: #818cf8;
+    --success: #10b981;
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+    --border: rgba(0, 0, 0, 0.12);
+    --border-accent: rgba(99, 102, 241, 0.3);
+  }
+
+  .dark {
+    --bg-primary: #02040a;
+    --bg-secondary: #05070f;
+    --bg-card: #0a0c14;
+    --bg-hover: #111420;
+    --accent: #6366f1;
+    --accent-soft: #818cf8;
+    --success: #10b981;
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --border: rgba(255, 255, 255, 0.05);
+    --border-accent: rgba(99, 102, 241, 0.3);
+  }
+
+  body {
+    @apply bg-bg-primary text-text-primary font-sans antialiased transition-colors duration-300 overflow-hidden h-screen;
+    background:
+      radial-gradient(circle at 12% 18%, rgba(20, 184, 166, 0.28), transparent 30%),
+      radial-gradient(circle at 82% 12%, rgba(99, 102, 241, 0.34), transparent 32%),
+      radial-gradient(circle at 50% 86%, rgba(236, 72, 153, 0.22), transparent 34%),
+      radial-gradient(circle at 36% 46%, rgba(255,255,255,0.1), transparent 30%),
+      linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+  }
+
+  html {
+    @apply overflow-hidden h-screen;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.custom-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.glass {
+  @apply backdrop-blur-xl bg-bg-card/80 border border-border/80 shadow-2xl;
+}
+
+.dark .glass {
+  @apply bg-bg-card/60 border-white/10 shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)];
+}
+
+.card-modern {
+  @apply bg-bg-card border border-border/80 shadow-xl transition-all duration-300;
+}
+
+.dark .card-modern {
+  @apply bg-[#0e111a] border-white/5 shadow-[0_8px_30px_rgb(0,0,0,0.12)];
+}
+
+.dark .card-modern:hover {
+  @apply border-accent/40 shadow-[0_0_30px_rgba(99,102,241,0.15)] translate-y-[-4px];
+}
+
+.input-glow {
+  @apply transition-all duration-300;
+}
+
+.input-glow:focus {
+  @apply border-accent/60 shadow-[0_0_20px_rgba(99,102,241,0.25)] ring-2 ring-accent/10;
+}
+
+.glow-accent {
+  @apply transition-all duration-300;
+}
+
+.glow-accent:hover {
+  @apply shadow-[0_0_25px_rgba(99,102,241,0.4)] border-accent/60;
+}
+
+.glow-pulse {
+  animation: glow-pulse 3s infinite ease-in-out;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 15px rgba(99,102,241,0.15); }
+  50% { box-shadow: 0 0 30px rgba(99,102,241,0.3); }
+}
+
+.premium-motion-scope {
+  isolation: isolate;
+}
+
+.premium-ambient-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.premium-ambient-layer::before {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  background:
+    linear-gradient(115deg, transparent 0 23%, rgba(34, 211, 238, 0.08) 24%, transparent 36%),
+    linear-gradient(245deg, transparent 0 46%, rgba(129, 140, 248, 0.12) 48%, transparent 63%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 92px);
+  transform: translate3d(-2%, -1%, 0);
+  animation: premium-ambient-drift 18s ease-in-out infinite alternate;
+  opacity: 0.76;
+}
+
+.premium-ambient-layer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 0 52%, rgba(0, 0, 0, 0.16) 100%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 7px);
+  mix-blend-mode: soft-light;
+  opacity: 0.5;
+}
+
+.app-career-shell::before {
+  animation: premium-shell-drift 16s ease-in-out infinite alternate;
+}
+
+.motion-page-enter {
+  animation: premium-page-enter 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  transform-origin: 50% 16px;
+}
+
+.app-career-shell .glass,
+.app-career-shell .card-modern,
+.app-career-shell .career-coach-card {
+  position: relative;
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background-color 220ms ease;
+}
+
+.app-career-shell .glass::before,
+.app-career-shell .card-modern::before,
+.app-career-shell .career-coach-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  padding: 1px;
+  background: linear-gradient(115deg, transparent 0 28%, rgba(255,255,255,0.24) 42%, transparent 56%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transform: translateX(-16%);
+  transition: opacity 220ms ease, transform 420ms ease;
+}
+
+.app-career-shell .glass:hover,
+.app-career-shell .card-modern:hover,
+.app-career-shell .career-coach-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--accent) 34%, var(--border));
+  box-shadow:
+    0 22px 70px rgba(0,0,0,0.18),
+    0 0 34px rgba(99, 102, 241, 0.12);
+}
+
+.app-career-shell .glass:hover::before,
+.app-career-shell .card-modern:hover::before,
+.app-career-shell .career-coach-card:hover::before {
+  opacity: 1;
+  transform: translateX(16%);
+}
+
+.app-career-shell button,
+.app-career-shell a {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.app-career-shell button:hover,
+.app-career-shell a:hover {
+  will-change: transform;
+}
+
+.app-career-shell aside nav a,
+.app-career-shell aside nav button {
+  position: relative;
+  overflow: hidden;
+}
+
+.app-career-shell aside nav a::after,
+.app-career-shell aside nav button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(100deg, transparent 0 35%, rgba(255,255,255,0.08) 50%, transparent 65%);
+  transform: translateX(-120%);
+  transition: transform 420ms ease;
+}
+
+.app-career-shell aside nav a:hover::after,
+.app-career-shell aside nav button:hover::after {
+  transform: translateX(120%);
+}
+
+.premium-ai-pulse {
+  position: relative;
+}
+
+.premium-ai-pulse::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: inherit;
+  border: 1px solid rgba(99, 102, 241, 0.32);
+  opacity: 0;
+  animation: premium-ai-pulse 2.8s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes premium-page-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0) scale(0.992);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes premium-ambient-drift {
+  from { transform: translate3d(-2%, -1%, 0) rotate(0deg); }
+  to { transform: translate3d(2%, 1.5%, 0) rotate(1.4deg); }
+}
+
+@keyframes premium-shell-drift {
+  from { transform: translate3d(-1%, -0.5%, 0) scale(1); }
+  to { transform: translate3d(1.5%, 1%, 0) scale(1.025); }
+}
+
+@keyframes premium-ai-pulse {
+  0% {
+    opacity: 0.55;
+    transform: scale(0.98);
+  }
+  72%, 100% {
+    opacity: 0;
+    transform: scale(1.18);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .motion-page-enter,
+  .app-career-shell::before,
+  .premium-ambient-layer::before,
+  .premium-ai-pulse::after {
+    animation: none !important;
+  }
+
+  .app-career-shell .glass:hover,
+  .app-career-shell .card-modern:hover,
+  .app-career-shell .career-coach-card:hover {
+    transform: none;
+  }
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-text-primary to-text-secondary;
+}
+
+.bg-mesh {
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(99,102,241,0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(59,130,246,0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(99,102,241,0.05) 0px, transparent 50%);
+}
+
+.app-career-shell {
+  background:
+    radial-gradient(circle at 16% 10%, rgba(34, 211, 238, 0.36), transparent 30%),
+    radial-gradient(circle at 86% 18%, rgba(99, 102, 241, 0.38), transparent 29%),
+    radial-gradient(circle at 58% 102%, rgba(236, 72, 153, 0.26), transparent 31%),
+    radial-gradient(circle at 42% 42%, rgba(255, 255, 255, 0.08), transparent 34%),
+    linear-gradient(135deg, color-mix(in srgb, var(--bg-primary) 94%, #ffffff), color-mix(in srgb, var(--bg-primary) 90%, #1e293b)),
+    var(--bg-primary);
+  position: relative;
+}
+
+.app-career-shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(115deg, transparent 0 16%, rgba(34, 211, 238, 0.16) 18%, transparent 34%),
+    linear-gradient(250deg, transparent 0 54%, rgba(168, 85, 247, 0.18) 58%, transparent 76%),
+    radial-gradient(circle at 72% 72%, rgba(45, 212, 191, 0.18), transparent 24%);
+  filter: blur(20px) saturate(1.35);
+  opacity: 0.95;
+}
+
+.app-career-shell::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 6px),
+    radial-gradient(circle at center, transparent 0 55%, rgba(0,0,0,0.08) 100%);
+  mix-blend-mode: soft-light;
+  opacity: 0.52;
+}
+
+.career-coach-bg {
+  background:
+    linear-gradient(rgba(34,211,238,0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168,85,247,0.05) 1px, transparent 1px),
+    radial-gradient(circle at 24% 18%, rgba(34,211,238,0.22), transparent 27%),
+    radial-gradient(circle at 78% 28%, rgba(168,85,247,0.22), transparent 29%),
+    radial-gradient(circle at 52% 76%, rgba(236,72,153,0.14), transparent 25%);
+  background-size: 54px 54px;
+  mask-image: radial-gradient(circle at center, black, transparent 78%);
+}
+
+.career-coach-card {
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--bg-card) 82%, transparent), color-mix(in srgb, var(--accent) 8%, var(--bg-card))),
+    radial-gradient(circle at 30% 0%, rgba(34,211,238,0.12), transparent 34%);
+  box-shadow: 0 22px 70px rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.app-career-shell aside nav a svg,
+.app-career-shell aside nav button svg,
+.app-career-shell header button svg {
+  filter: drop-shadow(0 8px 14px rgba(99,102,241,0.18));
+}
+
+.app-career-shell aside nav a:hover svg,
+.app-career-shell aside nav button:hover svg {
+  transform: translateY(-1px) rotate(-4deg) scale(1.08);
+  transition: transform 180ms ease;
+}
+
+.app-career-shell button,
+.app-career-shell a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.text-success {
+  color: #10b981;
+}
+
+.bg-success {
+  background-color: #10b981;
+}
+
+.border-success {
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.professions-engraved-bg {
+  background:
+    linear-gradient(90deg, rgba(15,23,42,0.045) 1px, transparent 1px),
+    linear-gradient(rgba(15,23,42,0.035) 1px, transparent 1px),
+    linear-gradient(135deg, rgba(120,113,108,0.12), rgba(255,255,255,0.35));
+  background-size: 36px 36px, 36px 36px, auto;
+}
+
+.professions-3d-stage {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.professions-ledger-card {
+  position: absolute;
+  left: 9%;
+  right: 8%;
+  top: 7%;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(100, 116, 139, 0.35);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.88), rgba(241,245,249,0.78)),
+    repeating-linear-gradient(0deg, transparent 0 29px, rgba(15,23,42,0.06) 30px);
+  box-shadow: 0 22px 70px rgba(15,23,42,0.16);
+  transform: rotateY(-10deg) rotateX(7deg) translateZ(16px);
+}
+
+.profession-float-card {
+  position: absolute;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  width: min(270px, 80%);
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(100,116,139,0.28);
+  background: rgba(255,255,255,0.78);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 18px 58px rgba(15,23,42,0.13);
+  transform-style: preserve-3d;
+  animation: profession-card-drift 5s ease-in-out infinite;
+}
+
+.profession-float-card-1 {
+  left: 0;
+  top: 3%;
+  transform: rotateY(-14deg) translateZ(60px);
+}
+
+.profession-float-card-2 {
+  right: 0;
+  top: 22%;
+  animation-delay: -1.2s;
+  transform: rotateY(13deg) translateZ(82px);
+}
+
+.profession-float-card-3 {
+  left: 4%;
+  bottom: 10%;
+  animation-delay: -2.4s;
+  transform: rotateY(-8deg) translateZ(48px);
+}
+
+.profession-float-card-4 {
+  right: 5%;
+  bottom: -2%;
+  animation-delay: -3.2s;
+  transform: rotateY(9deg) translateZ(70px);
+}
+
+@keyframes profession-card-drift {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -12px; }
+}
+
+@media (max-width: 640px) {
+  .professions-ledger-card {
+    left: 4%;
+    right: 4%;
+    top: 4%;
+    padding: 16px;
+    transform: rotateX(5deg);
+  }
+
+  .profession-float-card {
+    width: 86%;
+  }
+
+  .profession-float-card-1 { top: 44%; left: 0; }
+  .profession-float-card-2 { top: 59%; right: 0; }
+  .profession-float-card-3 { display: none; }
+  .profession-float-card-4 { display: none; }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .professions-ledger-card {
+    left: 10%;
+    right: 10%;
+    top: 7%;
+    transform: rotateX(5deg) translateZ(10px);
+  }
+
+  .profession-float-card {
+    width: min(260px, 78%);
+  }
+
+  .profession-float-card-1 { top: 4%; left: 2%; }
+  .profession-float-card-2 { top: 27%; right: 2%; }
+  .profession-float-card-3 { left: 4%; bottom: 7%; }
+  .profession-float-card-4 { right: 4%; bottom: -1%; }
+}
+
+.portfolio-weather-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.portfolio-rain-drop {
+  position: absolute;
+  top: -18%;
+  width: 1px;
+  height: 74px;
+  border-radius: 999px;
+  background: linear-gradient(to bottom, transparent, rgba(186, 230, 253, 0.82));
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.45));
+  animation: portfolio-rain-fall 0.9s linear infinite;
+}
+
+.portfolio-snow-flake {
+  position: absolute;
+  top: -10%;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 16px rgba(219, 234, 254, 0.8);
+  animation: portfolio-snow-fall 7s linear infinite;
+}
+
+.portfolio-aurora-field {
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(52, 211, 153, 0.28), transparent 28%),
+    radial-gradient(circle at 70% 24%, rgba(99, 102, 241, 0.34), transparent 31%),
+    radial-gradient(circle at 55% 86%, rgba(45, 212, 191, 0.2), transparent 30%);
+  filter: blur(38px);
+  animation: portfolio-aurora-drift 12s ease-in-out infinite alternate;
+}
+
+.portfolio-sunset-field {
+  background:
+    radial-gradient(circle at 18% 20%, rgba(251, 191, 36, 0.3), transparent 28%),
+    radial-gradient(circle at 70% 24%, rgba(244, 63, 94, 0.32), transparent 31%),
+    radial-gradient(circle at 55% 86%, rgba(79, 70, 229, 0.24), transparent 30%);
+}
+
+.portfolio-music-bars {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  bottom: 8%;
+  z-index: 2;
+  height: 210px;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 8px;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.portfolio-music-bars span {
+  width: 10px;
+  min-height: 18px;
+  border-radius: 999px;
+  background: linear-gradient(to top, rgba(34, 211, 238, 0.65), rgba(217, 70, 239, 0.95));
+  box-shadow: 0 0 28px rgba(217, 70, 239, 0.34);
+  animation: portfolio-music-pulse 1s ease-in-out infinite alternate;
+}
+
+.portfolio-music-bars-compact {
+  height: 86px;
+  left: 18%;
+  right: 18%;
+  bottom: 22%;
+  gap: 5px;
+  opacity: 0.72;
+}
+
+.portfolio-music-bars-compact span {
+  width: 6px;
+}
+
+.portfolio-mini-cube {
+  width: 62px;
+  height: 62px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.78), rgba(255,255,255,0.14));
+  border: 1px solid rgba(255,255,255,0.35);
+  transform: rotateX(58deg) rotateZ(42deg);
+  box-shadow: 18px 18px 35px rgba(0,0,0,0.2);
+  animation: portfolio-cube-float 4s ease-in-out infinite;
+}
+
+.portfolio-live-preview {
+  --portfolio-accent: #38bdf8;
+  position: relative;
+  min-height: 100vh;
+  color: #fff;
+  background:
+    radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--portfolio-accent) 35%, transparent), transparent 24%),
+    radial-gradient(circle at 82% 16%, rgba(168, 85, 247, 0.24), transparent 25%),
+    linear-gradient(135deg, #020617 0%, #07111f 45%, #020617 100%);
+  overflow: hidden;
+}
+
+.portfolio-template-art::after,
+.portfolio-live-preview::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.34;
+}
+
+.portfolio-mood-noir {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(217, 70, 239, 0.32), transparent 28%),
+    radial-gradient(circle at 78% 28%, rgba(34, 211, 238, 0.28), transparent 24%),
+    linear-gradient(135deg, #030712 0%, #111827 42%, #170022 100%);
+}
+
+.portfolio-mood-noir::after {
+  background:
+    linear-gradient(115deg, transparent 0 42%, rgba(34, 211, 238, 0.12) 43% 44%, transparent 45%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 78px);
+}
+
+.portfolio-mood-editorial {
+  background:
+    radial-gradient(circle at 22% 18%, rgba(251, 191, 36, 0.42), transparent 26%),
+    linear-gradient(135deg, #1c1917 0%, #78350f 45%, #030712 100%);
+}
+
+.portfolio-mood-editorial::after {
+  background: radial-gradient(circle at 70% 22%, rgba(255,255,255,0.22), transparent 18%);
+  opacity: 0.55;
+}
+
+.portfolio-mood-dream {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(244, 114, 182, 0.32), transparent 27%),
+    radial-gradient(circle at 75% 25%, rgba(125, 211, 252, 0.32), transparent 30%),
+    linear-gradient(135deg, #172554 0%, #581c87 55%, #0f172a 100%);
+}
+
+.portfolio-mood-dream::after {
+  background: radial-gradient(ellipse at 50% 75%, rgba(255,255,255,0.2), transparent 40%);
+  filter: blur(18px);
+}
+
+.portfolio-mood-aiLab,
+.portfolio-mood-multimodal {
+  background:
+    radial-gradient(circle at 25% 20%, rgba(59, 130, 246, 0.35), transparent 28%),
+    radial-gradient(circle at 82% 28%, rgba(139, 92, 246, 0.3), transparent 30%),
+    linear-gradient(135deg, #020617 0%, #111827 50%, #1e1b4b 100%);
+}
+
+.portfolio-mood-aiLab::after,
+.portfolio-mood-multimodal::after {
+  background:
+    repeating-linear-gradient(0deg, rgba(96,165,250,0.1) 0 1px, transparent 1px 34px),
+    repeating-linear-gradient(90deg, rgba(168,85,247,0.1) 0 1px, transparent 1px 34px);
+}
+
+.portfolio-mood-collage {
+  color: #1c1917;
+  background:
+    linear-gradient(135deg, rgba(254,243,199,0.96), rgba(254,215,170,0.88)),
+    radial-gradient(circle at 20% 30%, rgba(120, 53, 15, 0.25), transparent 28%);
+}
+
+.portfolio-mood-collage::after {
+  background:
+    repeating-linear-gradient(12deg, rgba(120, 53, 15, 0.09) 0 2px, transparent 2px 9px),
+    radial-gradient(circle at 72% 20%, rgba(244, 63, 94, 0.18), transparent 24%);
+  mix-blend-mode: multiply;
+}
+
+.portfolio-mood-game {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(163, 230, 53, 0.28), transparent 25%),
+    radial-gradient(circle at 75% 35%, rgba(34, 211, 238, 0.25), transparent 25%),
+    linear-gradient(135deg, #111827 0%, #312e81 48%, #0f172a 100%);
+}
+
+.portfolio-mood-game::after {
+  background:
+    linear-gradient(rgba(163,230,53,0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(163,230,53,0.12) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+.portfolio-mood-botanical {
+  color: #14532d;
+  background:
+    radial-gradient(circle at 22% 22%, rgba(251, 113, 133, 0.32), transparent 25%),
+    radial-gradient(circle at 78% 35%, rgba(134, 239, 172, 0.34), transparent 26%),
+    linear-gradient(135deg, #fce7f3 0%, #dcfce7 48%, #fef9c3 100%);
+}
+
+.portfolio-mood-botanical::after {
+  background:
+    radial-gradient(circle at 15% 72%, rgba(34,197,94,0.18), transparent 16%),
+    radial-gradient(circle at 88% 18%, rgba(251,113,133,0.18), transparent 14%);
+}
+
+.portfolio-mood-creatorNight {
+  background:
+    radial-gradient(circle at 20% 30%, rgba(251,191,36,0.22), transparent 22%),
+    radial-gradient(circle at 82% 22%, rgba(59,130,246,0.24), transparent 28%),
+    linear-gradient(135deg, #020617 0%, #1e293b 45%, #451a03 100%);
+}
+
+.portfolio-mood-creatorNight::after {
+  background: linear-gradient(90deg, transparent, rgba(251,191,36,0.12), transparent);
+}
+
+.portfolio-mood-indiaFuture {
+  background:
+    radial-gradient(circle at 20% 24%, rgba(251,146,60,0.34), transparent 26%),
+    radial-gradient(circle at 78% 30%, rgba(217,70,239,0.3), transparent 28%),
+    linear-gradient(135deg, #312e81 0%, #831843 48%, #431407 100%);
+}
+
+.portfolio-mood-indiaFuture::after {
+  background:
+    radial-gradient(circle at 20px 20px, rgba(255,255,255,0.16) 2px, transparent 3px);
+  background-size: 34px 34px;
+}
+
+.portfolio-live-light {
+  color: #0f172a;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(147, 197, 253, 0.48), transparent 24%),
+    radial-gradient(circle at 82% 16%, rgba(255, 255, 255, 0.65), transparent 25%),
+    linear-gradient(135deg, #eff6ff 0%, #f8fafc 45%, #dbeafe 100%);
+}
+
+.portfolio-depth-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.22;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 64px 64px;
+  transform: perspective(900px) rotateX(62deg) translateY(-20%);
+  transform-origin: top;
+  pointer-events: none;
+}
+
+.portfolio-live-light .portfolio-depth-grid {
+  opacity: 0.28;
+  background-image:
+    linear-gradient(rgba(15,23,42,0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,23,42,0.09) 1px, transparent 1px);
+}
+
+.portfolio-orbit-stage {
+  width: 420px;
+  height: 420px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.portfolio-orbit-card {
+  position: absolute;
+  width: 190px;
+  height: 250px;
+  border-radius: 34px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: linear-gradient(145deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+  backdrop-filter: blur(20px);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.24);
+  animation: portfolio-card-orbit 8s ease-in-out infinite alternate;
+}
+
+.portfolio-orbit-card-a {
+  left: 60px;
+  top: 20px;
+  transform: rotateY(-28deg) rotateX(12deg) rotateZ(-7deg);
+}
+
+.portfolio-orbit-card-b {
+  right: 25px;
+  top: 115px;
+  animation-delay: -2s;
+  transform: rotateY(24deg) rotateX(10deg) rotateZ(8deg);
+}
+
+.portfolio-orbit-card-c {
+  left: 118px;
+  bottom: 15px;
+  animation-delay: -4s;
+  transform: rotateY(-8deg) rotateX(18deg) rotateZ(4deg);
+}
+
+.portfolio-hero-device {
+  position: relative;
+  z-index: 3;
+  border-radius: 42px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: linear-gradient(145deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  backdrop-filter: blur(24px);
+  padding: 28px;
+  box-shadow: 0 42px 120px rgba(0,0,0,0.34);
+  transform-style: preserve-3d;
+}
+
+.portfolio-live-light .portfolio-hero-device,
+.portfolio-live-light .portfolio-section-shell,
+.portfolio-live-light .portfolio-project-card {
+  border-color: rgba(15, 23, 42, 0.12);
+  background: rgba(255,255,255,0.58);
+  box-shadow: 0 28px 90px rgba(59, 130, 246, 0.15);
+}
+
+.portfolio-section-shell {
+  position: relative;
+  z-index: 4;
+  border-radius: 42px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(24px);
+  padding: clamp(24px, 4vw, 48px);
+  box-shadow: 0 28px 90px rgba(0,0,0,0.24);
+}
+
+.portfolio-project-card {
+  border-radius: 34px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.09);
+  backdrop-filter: blur(20px);
+  padding: 22px;
+  transform-style: preserve-3d;
+  transition: border-color 220ms ease, background 220ms ease, box-shadow 220ms ease;
+  box-shadow: 0 22px 70px rgba(0,0,0,0.18);
+}
+
+.portfolio-project-card:hover {
+  border-color: color-mix(in srgb, var(--portfolio-accent) 55%, rgba(255,255,255,0.2));
+  box-shadow: 0 34px 100px rgba(0,0,0,0.28);
+}
+
+.portfolio-card-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.42;
+}
+
+@keyframes portfolio-rain-fall {
+  from { transform: translate3d(0, -120%, 0) rotate(12deg); }
+  to { transform: translate3d(-42px, 125vh, 0) rotate(12deg); }
+}
+
+@keyframes portfolio-snow-fall {
+  from { transform: translate3d(0, -120%, 0) rotate(0deg); opacity: 0; }
+  12% { opacity: 1; }
+  to { transform: translate3d(44px, 120vh, 0) rotate(240deg); opacity: 0.2; }
+}
+
+@keyframes portfolio-aurora-drift {
+  from { transform: translate3d(-3%, -2%, 0) rotate(0deg) scale(1); }
+  to { transform: translate3d(4%, 3%, 0) rotate(8deg) scale(1.08); }
+}
+
+@keyframes portfolio-music-pulse {
+  from { transform: scaleY(0.38); filter: hue-rotate(0deg); }
+  to { transform: scaleY(1.05); filter: hue-rotate(35deg); }
+}
+
+@keyframes portfolio-cube-float {
+  0%, 100% { transform: rotateX(58deg) rotateZ(42deg) translateY(0); }
+  50% { transform: rotateX(58deg) rotateZ(42deg) translateY(-12px); }
+}
+
+@keyframes portfolio-card-orbit {
+  from { translate: 0 0; }
+  to { translate: 0 -22px; }
+}
