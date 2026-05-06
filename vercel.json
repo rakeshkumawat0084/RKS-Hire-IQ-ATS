@@ -5,7 +5,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "https://your-render-service.onrender.com/api/$1"
+      "dest": "https://rks-hire-iq-backend.onrender.com/api/$1"
     },
     {
       "src": "/(.*)",
@@ -13,6 +13,6 @@
     }
   ],
   "env": {
-    "VITE_API_URL": "https://your-render-service.onrender.com"
+    "VITE_API_URL": "https://rks-hire-iq-backend.onrender.com"
   }
 }
