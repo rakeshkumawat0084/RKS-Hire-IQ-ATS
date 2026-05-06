@@ -8,6 +8,9 @@
       "dest": "https://rks-hire-iq-backend.onrender.com/api/$1"
     },
     {
+      "handle": "filesystem"
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }

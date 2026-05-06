@@ -954,10 +954,21 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), 'dist');
-    app.use(express.static(distPath));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
-    });
+    let distExists = false;
+
+    try {
+      await fs.access(distPath);
+      distExists = true;
+    } catch (err) {
+      console.warn(`>>> No dist folder found at ${distPath}; backend will run API-only.`);
+    }
+
+    if (distExists) {
+      app.use(express.static(distPath));
+      app.get('*', (req, res) => {
+        res.sendFile(path.join(distPath, 'index.html'));
+      });
+    }
   }
 
   // Start Server Listener
