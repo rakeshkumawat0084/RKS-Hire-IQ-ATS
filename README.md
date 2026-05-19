@@ -124,7 +124,8 @@ This project is configured for deployment on both Vercel (frontend) and Render (
    - `INITIAL_ADMIN_PASSWORD=<admin-password>`
    - `GEMINI_API_KEY=<your-gemini-api-key>`
    - `APP_URL=<your-render-service-url>` (will be auto-generated)
-6. Deploy the service
+6. Deploy the service 
+
 
 ### 2. Deploy Frontend on Vercel
 
@@ -140,7 +141,7 @@ This project is configured for deployment on both Vercel (frontend) and Render (
    - `VITE_API_URL=<your-render-backend-url>`
 6. Update `vercel.json`:
    - Replace `https://your-render-service.onrender.com` with your actual Render service URL
-7. Deploy the frontend
+7. Deploy the frontend and live
 
 ### 3. Update CORS (if needed)
 
@@ -151,6 +152,7 @@ app.use(cors({
   origin: ['https://your-vercel-app.vercel.app', 'http://localhost:3000'],
   credentials: true
 }));
+
 ```
 
 ### Environment Variables Summary
@@ -163,6 +165,7 @@ app.use(cors({
 - `INITIAL_ADMIN_PASSWORD=<admin-password>`
 - `GEMINI_API_KEY=<gemini-api-key>`
 - `APP_URL=<render-service-url>`
+
 
 **Frontend (Vercel)**:
 - `VITE_API_URL=<render-backend-url>`
