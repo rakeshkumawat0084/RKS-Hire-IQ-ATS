@@ -2,25 +2,14 @@
   "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "https://rks-hire-iq-backend.onrender.com/api/$1"
+      "source": "/api/:path*",
+      "destination": "https://rks-hire-iq-backend.onrender.com/api/:path*"
     },
     {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    },
-    {
-      "rewrites": [
-        {
-          "source": "/(.*)",
-          "destination": "/"
-        }
-      ]
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ],
   "env": {
