@@ -171,7 +171,7 @@ export default function AdminLayout() {
               aria-label="View notifications"
             >
                <Bell size={20} className="text-text-secondary hover:text-accent transition-colors" />
-               <span className="absolute top-1 right-1 w-2 h-2 bg-accent rounded-full border-2 border-bg-secondary"></span>
+               <span className="absolute top-1 right-1 w-2 h-2 bg-accent rounded-full border-2 border-bg-card dark:border-bg-secondary"></span>
             </button>
           </div>
         </header>

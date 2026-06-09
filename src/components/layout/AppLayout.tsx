@@ -285,7 +285,7 @@ export default function AppLayout() {
               aria-label="View notifications"
             >
               <Bell className="w-5 h-5 md:w-6 md:h-6 text-text-secondary hover:text-text-primary" />
-              <span className="premium-ai-pulse absolute top-1 right-1 w-2 h-2 bg-accent rounded-full border-2 border-bg-primary"></span>
+              <span className="absolute top-1 right-1 w-2 h-2 bg-accent rounded-full border-2 border-bg-card dark:border-bg-secondary"></span>
             </button>
             
             <button
