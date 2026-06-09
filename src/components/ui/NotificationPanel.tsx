@@ -75,16 +75,16 @@ export function NotificationPanel({ isOpen, onClose }: NotificationPanelProps) {
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
             className="fixed right-0 top-0 h-full w-full max-w-sm bg-bg-secondary border-l border-white/10 shadow-2xl z-[70] flex flex-col"
           >
-            <div className="p-6 border-b border-white/5 flex items-center justify-between">
+            <div className="p-6 border-b border-border/10 dark:border-white/10 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-accent/10 rounded-lg">
                   <Bell size={20} className="text-accent" />
                 </div>
-                <h2 className="text-xl font-bold text-white">Notifications</h2>
+                <h2 className="text-xl font-bold text-text-primary dark:text-white">Notifications</h2>
               </div>
               <button
                 onClick={onClose}
-                className="p-2 hover:bg-white/5 rounded-lg text-text-muted hover:text-white transition-colors"
+                className="p-2 hover:bg-white/5 rounded-lg text-text-muted hover:text-text-primary dark:hover:text-white transition-colors"
               >
                 <X size={20} />
               </button>
@@ -108,14 +108,14 @@ export function NotificationPanel({ isOpen, onClose }: NotificationPanelProps) {
                     </div>
                     <div className="flex-1">
                       <div className="flex justify-between items-start mb-1">
-                        <h4 className="font-bold text-sm text-white group-hover:text-accent transition-colors">
+                        <h4 className="font-bold text-sm text-text-primary dark:text-white group-hover:text-accent transition-colors">
                           {notif.title}
                         </h4>
-                        <span className="flex items-center gap-1 text-[10px] text-text-muted font-medium">
+                        <span className="flex items-center gap-1 text-[10px] text-text-muted dark:text-text-muted font-medium">
                           <Clock size={10} /> {notif.time}
                         </span>
                       </div>
-                      <p className="text-xs text-text-secondary leading-relaxed">
+                      <p className="text-xs text-text-secondary dark:text-text-secondary leading-relaxed">
                         {notif.message}
                       </p>
                     </div>
@@ -124,10 +124,10 @@ export function NotificationPanel({ isOpen, onClose }: NotificationPanelProps) {
               ))}
             </div>
 
-            <div className="p-6 border-t border-white/5">
+            <div className="p-6 border-t border-border/10 dark:border-white/10">
               <button
                 onClick={() => setNotifications(prev => prev.map(notif => ({ ...notif, read: true })))}
-                className="w-full py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-sm font-bold text-white transition-all"
+                className="w-full py-3 bg-white/5 hover:bg-white/10 border border-border/10 dark:border-white/10 rounded-xl text-sm font-bold text-text-primary dark:text-white transition-all"
               >
                 Mark all as read
               </button>
