@@ -391,7 +391,12 @@ function startCompanyTrendParser() {
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const rawPort = process.env.PORT;
+  const PORT = rawPort ? Number(rawPort) : 3000;
+
+  if (rawPort && Number.isNaN(PORT)) {
+    console.warn(`Invalid PORT value '${rawPort}' detected, falling back to 3000.`);
+  }
 
   // Basic Middleware
   app.use(cors());
